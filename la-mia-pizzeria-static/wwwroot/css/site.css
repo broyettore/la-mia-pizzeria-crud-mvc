@@ -40,27 +40,27 @@ img {
     box-shadow: 0 0 5px #000;
 }
 
-.card-one {
+.card-1 {
     background: url(/img/Margherita-9920.webp);
 }
 
-.card-two {
+.card-2 {
     background: url('/img/4 formaggi.jfif');
 }
 
-.card-three {
+.card-3 {
     background: url(/img/capri.jfif);
 }
 
-.card-four {
+.card-4 {
     background: url(/img/fp.jfif);
 }
 
-.card-five {
+.card-5 {
     background: url(/img/mari.jfif);
 }
 
-.card-six {
+.card-6 {
     background: url(/img/sea_earth.jfif);
 }
 

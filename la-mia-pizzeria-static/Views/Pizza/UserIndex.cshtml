@@ -1,0 +1,29 @@
+﻿@{
+    Layout = "_Layout";
+}
+
+@model List<Pizza>
+
+<div class="container d-flex flex-wrap justify-content-between py-4">
+    @foreach (Pizza pizza in Model)
+    {
+        <div class="my-card-container card-@pizza.PizzaId my-3 mt-0">
+            <div class="overlay">
+                <div class="items"></div>
+                <div class="items head">
+                    <p>@pizza.Name</p>
+                    <p class="ms-card-p">@pizza.Description</p>
+                    <hr />
+                </div>
+                <div class="items price">
+                    <p class="new">@pizza.Price</p>
+                </div>
+                <div class="items cart">
+                    <i class="fa fa-shopping-cart"></i>
+                    <span>ADD TO CART</span>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+

@@ -11,7 +11,7 @@ using la_mia_pizzeria_static.Database;
 namespace la_mia_pizzeria_static.Migrations
 {
     [DbContext(typeof(PizzaContext))]
-    [Migration("20230929100618_InitialCreate")]
+    [Migration("20230929103822_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />

@@ -1,0 +1,47 @@
+﻿@{
+    Layout = "_Layout";
+}
+
+@model List<Pizza>
+
+@if (Model.Count() == 0)
+{
+    <h3>No pizzas availables</h3>
+}
+else
+{
+    <div class="container py-4">
+        <div class="container d-flex flex-wrap justify-content-between py-4">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">Id</th>
+                        <th scope="col">Image</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Description</th>
+                        <th scope="col">Price</th>
+                        <th scope="col">Details</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (Pizza pizza in Model)
+                    {
+                        <tr>
+                            <th scope="row">@pizza.PizzaId</th>
+                            <td><img width="200" src="@pizza.ImgPath" alt="@pizza.Name" /></td>
+                            <td>@pizza.Name</td>
+                            <td>@pizza.Description</td>
+                            <td>@pizza.Price</td>
+                            <th scope="col">
+                                <a class="btn btn primary" href="@Url.Action("Details", "Pizza", new { id = pizza.PizzaId })">More...</a>
+                            </th>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+}
+
+

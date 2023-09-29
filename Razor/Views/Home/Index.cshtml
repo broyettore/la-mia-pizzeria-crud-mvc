@@ -1,0 +1,88 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+
+    // functions
+
+    int SumToN(int n) // sum to a number
+    {
+        int sum = 0;
+        for (int i = 1; i <= n; i++)
+        {
+            sum += i;
+        }
+        return sum;
+    }
+
+    int NumOfLetterA(string str) // count letter a in a sentence
+    {
+        int sum = 0;
+        for (int i = 0; i < str.Length; i++)
+        {
+            char letter = char.ToLower(str[i]);
+            if (letter == 'a')
+            {
+                sum += 1;
+            }
+        }
+        return sum;
+    }
+
+    List<int> GenListOfRandNums(int n) // List of random number
+    {
+        int min = 1;
+        int max = 91;
+        List<int> numList = new List<int>();
+        Random rand = new Random();
+
+        for(int i = 0; i < n; i++)
+        {
+            int randNum = rand.Next(min, max);
+            numList.Add(randNum);
+        }
+
+        return numList;
+    }
+
+    // variables
+    string myName = "Roy";
+    string mySurname = "Bagnarola";
+    string phrase = "nel mezzo del cammin di nostra vita";
+    int n = 8;
+    int nAlt = 20;
+
+    // dates instances
+    DateTime myDate = DateTime.Now;
+    DateTime sevenDaysAgo = myDate.AddDays(-7);
+    DateTime nextYearDate = myDate.AddYears(1);
+
+    // formatted dates
+    string dayOfWeekNextYear = nextYearDate.ToString("dddd");
+    string todayDayOfTheWeek = myDate.ToString("dddd");
+    string formattedDate = myDate.ToString("yyyy-MM-dd HH:mm:ss");
+    string formattedDatePast = sevenDaysAgo.ToString("yyyy-MM-dd HH:mm:ss");
+
+    // varibales that contain functions
+    int sumN = SumToN(n);
+    int countA = NumOfLetterA(phrase);
+
+}
+
+<div>
+    <h2>Hello @myName @mySurname</h2>
+    <span>The sum of numbers up to @n is: @sumN</span>
+    <p>the number of times the letter a is present in this sentence "nel mezzo del cammin di nostra vita" is : @countA</p>                    
+    <p> La lista di numeri random compresi tra 20 e 70 sono:
+        @foreach(int num in GenListOfRandNums(nAlt))
+        {
+            if(num > 20 && num < 70)
+            {
+                <span>@num</span>
+            }
+        }
+    </p>
+    <p>Today's date is: @formattedDate</p>
+    <p>Seven days ago was: @formattedDatePast</p>
+    <p>Today's day is: @todayDayOfTheWeek</p>
+    <p>Today's day next year is: @dayOfWeekNextYear</p>
+</div>
+

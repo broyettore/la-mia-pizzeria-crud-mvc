@@ -31,7 +31,7 @@ else
                             <td><img width="200" src="@pizza.ImgPath" alt="@pizza.Name" /></td>
                             <td>@pizza.Name</td>
                             <td>@pizza.Description</td>
-                            <td>@pizza.Price</td>
+                            <td>€@pizza.Price</td>
                             <th scope="col">
                                 <a class="btn btn primary" href="@Url.Action("Details", "Pizza", new { id = pizza.PizzaId })">More...</a>
                             </th>

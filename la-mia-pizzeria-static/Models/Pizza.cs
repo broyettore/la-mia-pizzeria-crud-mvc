@@ -18,6 +18,7 @@ namespace la_mia_pizzeria_static.Models
         public string ImgPath { get; set; }
 
         [Required(ErrorMessage = "You must insert a description of your pizza")]
+        [MoreThanFiveWords]
         public string Description { get; set; }
 
         [Required(ErrorMessage = "You must insert a price for your pizza")]

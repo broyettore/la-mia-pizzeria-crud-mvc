@@ -10,37 +10,44 @@
 }
 else
 {
-    <div class="container py-4">
-        <div class="container d-flex flex-wrap justify-content-between py-4">
-            <table class="table">
-                <thead>
+
+    <div class="container py-3">
+        <h1>Our Pizzas</h1>
+
+        <a class="btn my-5"
+           href="@Url.Action("Create", "Pizza")">
+            Create a New Pizza
+        </a>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Id</th>
+                    <th scope="col">Image</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">Price</th>
+                    <th scope="col">Details</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (Pizza pizza in Model)
+                {
                     <tr>
-                        <th scope="col">Id</th>
-                        <th scope="col">Image</th>
-                        <th scope="col">Name</th>
-                        <th scope="col">Description</th>
-                        <th scope="col">Price</th>
-                        <th scope="col">Details</th>
+                        <th scope="row">@pizza.PizzaId</th>
+                        <td><img width="200" src="@pizza.ImgPath" alt="@pizza.Name" /></td>
+                        <td>@pizza.Name</td>
+                        <td>@pizza.Description</td>
+                        <td>€@pizza.Price</td>
+                        <th scope="col">
+                            <a class="btn btn primary" href="@Url.Action("Details", "Pizza", new { id = pizza.PizzaId })">See More...</a>
+                        </th>
                     </tr>
-                </thead>
-                <tbody>
-                    @foreach (Pizza pizza in Model)
-                    {
-                        <tr>
-                            <th scope="row">@pizza.PizzaId</th>
-                            <td><img width="200" src="@pizza.ImgPath" alt="@pizza.Name" /></td>
-                            <td>@pizza.Name</td>
-                            <td>@pizza.Description</td>
-                            <td>€@pizza.Price</td>
-                            <th scope="col">
-                                <a class="btn btn primary" href="@Url.Action("Details", "Pizza", new { id = pizza.PizzaId })">More...</a>
-                            </th>
-                        </tr>
-                    }
-                </tbody>
-            </table>
-        </div>
+                }
+            </tbody>
+        </table>
     </div>
+
 
 }
 

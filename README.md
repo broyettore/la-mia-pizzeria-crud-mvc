@@ -28,3 +28,11 @@ Dobbiamo realizzare :
 BONUS:
 * Implementare i concetti di Dependency Injection visto, per esempio facendo i vostri CustomLoggers. (Riflettete sul discorso dell'importanza delle Interfacce e poi sulla DI applicata nel contesto di web con numerosi controllers)
 Provate a semplificare la sintassi dei vostri controller aggiungendo come DI il vostro database.
+
+### Parte Quattro
+Oggi sviluppiamo un’importante funzionalità : aggiungiamo una categoria alle nostre pizze (”Pizze classiche”, “Pizze bianche”, “Pizze vegetariane”, “Pizze di mare”, ...).
+Dobbiamo quindi predisporre tutto il codice necessario per poter collegare una categoria a una pizza (in una relazione 1 a molti, cioè una pizza può avere una sola categoria, e una categoria può essere collegata a più pizze).
+Tramite migration dobbiamo creare la tabella per le categorie. Popoliamola a mano con i valori elencati precedentemente.
+Aggiungiamo poi l’informazione della categoria nelle varie pagine :
+* nei dettagli di una singola pizza (nell’admin) mostrare la sua categoria
+* quando si crea/modifica una pizza si deve poter selezionare anche la sua categoria

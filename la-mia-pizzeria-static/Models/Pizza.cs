@@ -25,12 +25,15 @@ namespace la_mia_pizzeria_static.Models
         [PositivePrice]
         public double Price { get; set; }
 
+        public int? CategoryId { get; set; }
+        public Category? Category { get; set; }
+
         public Pizza() { }
 
         public override string ToString()
         {
-            string formattedPrice = "€" + this.Price.ToString();
-            return $"\n Pizza Name: {this.Name} \n Description: {this.Description} \n Price: {formattedPrice}";
+            string formattedPrice = "€" + Price.ToString();
+            return $"\n Pizza Name: {Name} \n Description: {Description} \n Price: {formattedPrice}";
         }
     }
 }

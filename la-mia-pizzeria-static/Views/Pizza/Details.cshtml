@@ -7,6 +7,21 @@
             <div class="items head">
                 <p>@Model.Name</p>
                 <p class="ms-card-p">@Model.Description</p>
+                <p class="ms-card-secondary">
+                    <span>
+                        Category:
+                        @if (Model.Category != null)
+                        {
+                            @Model.Category.Title
+                        }
+                        else
+                        {
+                            <small>
+                                Not specified
+                            </small>
+                        }
+                    </span>
+                </p>
                 <hr />
             </div>
             <div class="items price">

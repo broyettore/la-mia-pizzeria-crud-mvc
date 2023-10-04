@@ -112,16 +112,16 @@ main {
     transition: all 0.7s;
 }
 
-    .head hr {
-        display: block;
-        width: 0;
-        border: none;
-        border-bottom: solid 2px #fef5df;
-        position: absolute;
-        bottom: 0;
-        left: 20px;
-        transition: all 0.5s;
-    }
+.head hr {
+    display: block;
+    width: 0;
+    border: none;
+    border-bottom: solid 2px #fef5df;
+    position: absolute;
+    bottom: 0;
+    left: 20px;
+    transition: all 0.5s;
+}
 
 .price {
     font-size: 22px;
@@ -132,10 +132,10 @@ main {
     transition: all 0.7s;
 }
 
-    .price .old {
-        text-decoration: line-through;
-        color: #b3b3b3;
-    }
+.price .old {
+    text-decoration: line-through;
+    color: #b3b3b3;
+}
 
 .cart {
     font-size: 12px;
@@ -146,42 +146,46 @@ main {
     transition: all 0.7s;
 }
 
-    .cart i {
-        font-size: 16px;
-    }
+.cart i {
+    font-size: 16px;
+}
 
-    .cart span {
-        margin-left: 10px;
-    }
+.cart span {
+    margin-left: 10px;
+}
 
 .my-card-container:hover .overlay {
     opacity: 1;
 }
 
-    .my-card-container:hover .overlay .head {
-        transform: translateY(0px);
-    }
+.my-card-container:hover .overlay .head {
+    transform: translateY(0px);
+}
 
-    .my-card-container:hover .overlay hr {
-        width: 75px;
-        transition-delay: 0.4s;
-    }
+.my-card-container:hover .overlay hr {
+    width: 75px;
+    transition-delay: 0.4s;
+}
 
-    .my-card-container:hover .overlay .price {
-        transform: translateY(0px);
-        transition-delay: 0.3s;
-        opacity: 1;
-    }
+.my-card-container:hover .overlay .price {
+    transform: translateY(0px);
+    transition-delay: 0.3s;
+    opacity: 1;
+}
 
-    .my-card-container:hover .overlay .cart {
-        transform: translateY(0px);
-        transition-delay: 0.6s;
-        opacity: 1;
-    }
+.my-card-container:hover .overlay .cart {
+    transform: translateY(0px);
+    transition-delay: 0.6s;
+    opacity: 1;
+}
 
 .ms-card-p {
     font-size: 1.1rem;
     line-height: 1.5rem;
+}
+
+.ms-card-secondary {
+    font-size: 1.1rem;
 }
 
 /*************** header links styling *************/

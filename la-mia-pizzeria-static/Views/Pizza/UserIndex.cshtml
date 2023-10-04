@@ -13,6 +13,21 @@
                 <div class="items head">
                     <p>@pizza.Name</p>
                     <p class="ms-card-p">@pizza.Description</p>
+                    <p class="ms-card-secondary">
+                        <span>
+                            Category:
+                            @if (pizza.Category != null)
+                            {
+                                @pizza.Category.Title
+                            }
+                            else
+                            {
+                                <small>
+                                    Not specified
+                                </small>
+                            }
+                        </span>
+                    </p>
                     <hr />
                 </div>
                 <div class="items price">

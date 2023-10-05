@@ -27,6 +27,8 @@ else
                     <th scope="col">Name</th>
                     <th scope="col">Description</th>
                     <th scope="col">Price</th>
+                    <th scope="col">Category</th>
+                    <th scope="col">Ingredients</th>
                     <th scope="col">Details</th>
                 </tr>
             </thead>
@@ -39,6 +41,40 @@ else
                         <td>@pizza.Name</td>
                         <td>@pizza.Description</td>
                         <td>€@pizza.Price</td>
+                        <td>
+                            @if (pizza.Category != null)
+                            {
+                                @pizza.Category.Title
+                            }
+                            else
+                            {
+                                <small>
+                                    Not specified
+                                </small>
+                            }
+                        </td>
+                        <td>
+                            @if (pizza.Ingredients?.Count > 0)
+                            {
+                                @for (var i = 0; i < pizza.Ingredients.Count; i++)
+                                {
+                                    var ingredient = pizza.Ingredients[i].IngredientName;
+                                    @ingredient
+                                    if (i < pizza.Ingredients.Count - 1)
+                                    {
+                                        @(", ")
+                                    }
+                                    else
+                                    {
+                                        @(". ")
+                                    }
+                                }
+                            }
+                            else
+                            {
+                                <small>No Ingredients Specified</small>
+                            }
+                        </td>
                         <th scope="col">
                             <a class="btn btn primary" href="@Url.Action("Details", "Pizza", new { id = pizza.PizzaId })">See More</a>
                             <a class="btn btn primary" href="@Url.Action("Update", "Pizza", new { id = pizza.PizzaId })">Edit Pizza</a>
@@ -54,8 +90,6 @@ else
             </tbody>
         </table>
     </div>
-
-
 }
 
 

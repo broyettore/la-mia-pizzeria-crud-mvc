@@ -25,8 +25,13 @@ namespace la_mia_pizzeria_static.Models
         [PositivePrice]
         public double Price { get; set; }
 
+        // 1:N relation with category
         public int? CategoryId { get; set; }
         public Category? Category { get; set; }
+
+        // N:N relation with ingredients
+        public List<Ingredient>? Ingredients { get; set; }
+
 
         public Pizza() { }
 

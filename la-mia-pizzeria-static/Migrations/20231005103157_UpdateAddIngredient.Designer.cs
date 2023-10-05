@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using la_mia_pizzeria_static.Database;
 
@@ -11,9 +12,11 @@ using la_mia_pizzeria_static.Database;
 namespace la_mia_pizzeria_static.Migrations
 {
     [DbContext(typeof(PizzaContext))]
-    partial class PizzaContextModelSnapshot : ModelSnapshot
+    [Migration("20231005103157_UpdateAddIngredient")]
+    partial class UpdateAddIngredient
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -69,7 +72,7 @@ namespace la_mia_pizzeria_static.Migrations
 
                     b.HasKey("IngredientID");
 
-                    b.ToTable("Ingredients");
+                    b.ToTable("Ingredient");
                 });
 
             modelBuilder.Entity("la_mia_pizzeria_static.Models.Pizza", b =>

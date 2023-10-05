@@ -180,12 +180,13 @@ main {
 }
 
 .ms-card-p {
-    font-size: 1.1rem;
+    font-size: 1rem;
     line-height: 1.5rem;
 }
 
 .ms-card-secondary {
-    font-size: 1.1rem;
+    font-size: 1rem;
+    line-height: 20px;
 }
 
 /*************** header links styling *************/
@@ -197,19 +198,19 @@ a {
     position: relative;
 }
 
-    a::before {
-        content: '';
-        background-color: lightsalmon;
-        position: absolute;
-        left: 0;
-        bottom: 3px;
-        width: 100%;
-        height: 3px;
-        z-index: -1;
-        transition: all .3s ease-in-out;
-    }
+a::before {
+    content: '';
+    background-color: lightsalmon;
+    position: absolute;
+    left: 0;
+    bottom: 3px;
+    width: 100%;
+    height: 3px;
+    z-index: -1;
+    transition: all .3s ease-in-out;
+}
 
-    a:hover::before {
-        bottom: 0;
-        height: 100%;
-    }
+a:hover::before {
+    bottom: 0;
+    height: 100%;
+}

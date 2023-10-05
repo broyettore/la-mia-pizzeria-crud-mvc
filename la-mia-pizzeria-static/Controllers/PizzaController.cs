@@ -1,6 +1,7 @@
 ﻿using la_mia_pizzeria_static.Database;
 using la_mia_pizzeria_static.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 
@@ -18,21 +19,22 @@ namespace la_mia_pizzeria_static.Controllers
 
         public IActionResult Index()
         {
-            List<Pizza> pizzas = _myDb.Pizzas.ToList<Pizza>();
-
+            List<Pizza> pizzas = _myDb.Pizzas
+                                      .Include(p => p.Category)
+                                      .Include(p => p.Ingredients)
+                                      .ToList();
             return View("Index", pizzas);
         }
 
         public IActionResult UserIndex()
         {
             List<Pizza> pizzas = _myDb.Pizzas.ToList<Pizza>();
-
             return View("UserIndex", pizzas);
         }
 
         public IActionResult Details(int id)
         {
-            Pizza? foundPizza = _myDb.Pizzas.Where(p => p.PizzaId == id).Include(p => p.Category).FirstOrDefault();
+            Pizza? foundPizza = _myDb.Pizzas.Where(p => p.PizzaId == id).Include(p => p.Category).Include(p => p.Ingredients).FirstOrDefault();
 
             if (foundPizza == null)
             {
@@ -48,8 +50,25 @@ namespace la_mia_pizzeria_static.Controllers
         public IActionResult Create()
         {
             List<Category> categories = _myDb.Categories.ToList();
+            List<SelectListItem> AllIngredientSelectList = new();
+            List<Ingredient> dbAllIngredients = _myDb.Ingredients.ToList();
 
-            PizzaFormModel model = new() { Pizza = new(), Categories = categories };
+            foreach (Ingredient ingredient in dbAllIngredients)
+            {
+                AllIngredientSelectList.Add(
+                    new SelectListItem
+                    {
+                        Text = ingredient.IngredientName,
+                        Value = ingredient.IngredientID.ToString(),
+                    });
+            }
+
+            PizzaFormModel model = new()
+            {
+                Pizza = new(),
+                Categories = categories,
+                Ingredients = AllIngredientSelectList
+            };
 
             return View("Create", model);
         }
@@ -63,7 +82,39 @@ namespace la_mia_pizzeria_static.Controllers
                 List<Category> categories = _myDb.Categories.ToList();
                 data.Categories = categories;
 
+                List<SelectListItem> AllIngredientSelectList = new();
+                List<Ingredient> dbAllIngredients = _myDb.Ingredients.ToList();
+
+                foreach (Ingredient ingredient in dbAllIngredients)
+                {
+                    AllIngredientSelectList.Add(
+                        new SelectListItem
+                        {
+                            Text = ingredient.IngredientName,
+                            Value = ingredient.IngredientID.ToString(),
+                        });
+                }
+
+                data.Ingredients = AllIngredientSelectList;
+
                 return View("Create", data);
+            }
+
+            data.Pizza.Ingredients = new List<Ingredient>();
+
+            if (data.SelectedIngredientsId != null)
+            {
+                foreach (string selectedIngredientId in data.SelectedIngredientsId)
+                {
+                    int intSelectedIngredientId = int.Parse(selectedIngredientId);
+
+                    Ingredient? ingredientInDb = _myDb.Ingredients.Where(i => i.IngredientID == intSelectedIngredientId).FirstOrDefault();
+
+                    if (ingredientInDb != null)
+                    {
+                        data.Pizza.Ingredients.Add(ingredientInDb);
+                    }
+                }
             }
 
             _myDb.Pizzas.Add(data.Pizza);
@@ -76,7 +127,7 @@ namespace la_mia_pizzeria_static.Controllers
         public IActionResult Update(int id)
         {
 
-            Pizza? pizzaToEdit = _myDb.Pizzas.Where(p => p.PizzaId == id).FirstOrDefault();
+            Pizza? pizzaToEdit = _myDb.Pizzas.Where(p => p.PizzaId == id).Include(p => p.Ingredients).FirstOrDefault();
 
 
             if (pizzaToEdit == null)
@@ -86,8 +137,26 @@ namespace la_mia_pizzeria_static.Controllers
             else
             {
                 List<Category> categories = _myDb.Categories.ToList();
+                List<SelectListItem> AllIngredientSelectList = new();
+                List<Ingredient> dbAllIngredients = _myDb.Ingredients.ToList();
 
-                PizzaFormModel model = new() { Pizza = pizzaToEdit, Categories = categories };
+                foreach (Ingredient ingredient in dbAllIngredients)
+                {
+                    AllIngredientSelectList.Add(
+                        new SelectListItem
+                        {
+                            Text = ingredient.IngredientName,
+                            Value = ingredient.IngredientID.ToString(),
+                            Selected = pizzaToEdit.Ingredients.Any(relatedIngredient => relatedIngredient.IngredientID == ingredient.IngredientID)
+                        });
+                }
+
+                PizzaFormModel model = new()
+                {
+                    Pizza = pizzaToEdit,
+                    Categories = categories,
+                    Ingredients = AllIngredientSelectList
+                };
 
                 return View("Update", model);
             }
@@ -104,18 +173,53 @@ namespace la_mia_pizzeria_static.Controllers
             if (!ModelState.IsValid)
             {
                 List<Category> categories = _myDb.Categories.ToList();
-                data.Categories= categories;
+                data.Categories = categories;
+
+                List<SelectListItem> AllIngredientSelectList = new();
+                List<Ingredient> dbAllIngredients = _myDb.Ingredients.ToList();
+
+                foreach (Ingredient ingredient in dbAllIngredients)
+                {
+                    AllIngredientSelectList.Add(
+                        new SelectListItem
+                        {
+                            Text = ingredient.IngredientName,
+                            Value = ingredient.IngredientID.ToString(),
+                        });
+                }
+
+                data.Ingredients = AllIngredientSelectList;
+
                 return View("Update", data);
             }
 
 
-            Pizza? pizzaToEdit = _myDb.Pizzas.Find(id);
+            Pizza? pizzaToEdit = _myDb.Pizzas.Where(p => p.PizzaId == id).Include(p => p.Ingredients).FirstOrDefault();
 
             if (pizzaToEdit != null)
             {
-                _logger.LogInformation("Pizza found for update. ID: {id}", id);
-                EntityEntry<Pizza> entryEntity = _myDb.Entry(pizzaToEdit);
-                entryEntity.CurrentValues.SetValues(data.Pizza);
+                pizzaToEdit.Ingredients.Clear();
+
+                pizzaToEdit.Name = data.Pizza.Name;
+                pizzaToEdit.Description = data.Pizza.Description;
+                pizzaToEdit.ImgPath = data.Pizza.ImgPath;
+                pizzaToEdit.Price = data.Pizza.Price;
+                pizzaToEdit.CategoryId = data.Pizza.CategoryId;
+
+                if (data.SelectedIngredientsId != null)
+                {
+                    foreach (string selectedIngredientId in data.SelectedIngredientsId)
+                    {
+                        int intSelectedIngredientId = int.Parse(selectedIngredientId);
+
+                        Ingredient? ingredientInDb = _myDb.Ingredients.Where(i => i.IngredientID == intSelectedIngredientId).FirstOrDefault();
+
+                        if (ingredientInDb != null)
+                        {
+                            pizzaToEdit.Ingredients.Add(ingredientInDb);
+                        }
+                    }
+                }
 
                 _myDb.SaveChanges();
                 return RedirectToAction("Index");

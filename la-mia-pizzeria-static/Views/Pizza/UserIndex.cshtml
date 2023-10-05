@@ -14,19 +14,27 @@
                     <p>@pizza.Name</p>
                     <p class="ms-card-p">@pizza.Description</p>
                     <p class="ms-card-secondary">
-                        <span>
-                            Category:
-                            @if (pizza.Category != null)
+                            Ingredients:
+                            @if (pizza.Ingredients?.Count > 0)
                             {
-                                @pizza.Category.Title
+                                @for (var i = 0; i < pizza.Ingredients.Count; i++)
+                                {
+                                    var ingredient = pizza.Ingredients[i].IngredientName;
+                                    @ingredient
+                                    if (i < pizza.Ingredients.Count - 1)
+                                    {
+                                        @(", ")
+                                    }
+                                    else
+                                    {
+                                        @(". ")
+                                    }
+                                }
                             }
                             else
                             {
-                                <small>
-                                    Not specified
-                                </small>
+                                <small>No Ingredients Specified</small>
                             }
-                        </span>
                     </p>
                     <hr />
                 </div>

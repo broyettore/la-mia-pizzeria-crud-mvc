@@ -1,36 +1,51 @@
 ﻿@model Pizza
 
-<div class="container d-flex align-items-center justify-content-center">
-    <div class="my-card-container card-@Model.PizzaId my-3 mt-0">
-        <div class="overlay">
-            <div class="items"></div>
-            <div class="items head">
-                <p>@Model.Name</p>
-                <p class="ms-card-p">@Model.Description</p>
-                <p class="ms-card-secondary">
-                    <span>
-                        Category:
-                        @if (Model.Category != null)
-                        {
-                            @Model.Category.Title
-                        }
-                        else
-                        {
-                            <small>
-                                Not specified
-                            </small>
-                        }
-                    </span>
-                </p>
-                <hr />
-            </div>
-            <div class="items price">
-                <p class="new">€@Model.Price</p>
-            </div>
-            <div class="items cart">
-                <i class="fa fa-shopping-cart"></i>
-                <span>ORDER NOW</span>
-            </div>
-        </div>
+<div class="container">
+    <h2 class="mb-3">Pizza Details</h2>
+    <div class="mb-3">
+        <img class="card-@Model.PizzaId" />
     </div>
+    <h3 class="mb-2">Name: @Model.Name</h3>
+    <p class="mb-2">Description: @Model.Description</p>
+    <p class="mb-2">Price: €@Model.Price</p>
+    <p class="mb-2">
+        <span>
+            Category:
+            @if (Model.Category != null)
+            {
+                @Model.Category.Title
+            }
+            else
+            {
+                <small>
+                    Not specified
+                </small>
+            }
+        </span>
+    </p>
+    <p class="mb-2">
+        <span>
+            Ingredients:
+            @if (Model.Ingredients?.Count > 0)
+            {
+                @for (var i = 0; i < Model.Ingredients.Count; i++)
+                {
+                    var ingredient = Model.Ingredients[i].IngredientName;
+                    @ingredient
+                    if (i < Model.Ingredients.Count - 1)
+                    {
+                        @(", ")
+                    }
+                    else
+                    {
+                        @(". ")
+                    }
+                }
+            }
+            else
+            {
+                <small>No Ingredients Specified</small>
+            }
+        </span>
+    </p>
 </div>

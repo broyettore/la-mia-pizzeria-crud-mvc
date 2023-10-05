@@ -14,7 +14,7 @@ Ad esempio verifichiamo che :
 * i dati della pizza siano tutti presenti
 * il campi di testo non superino una certa lunghezza
 * il prezzo abbia un valore valido (ha senso una pizza con prezzo minore o uguale a zero?)
-* 
+  
 BONUS
 * Prevediamo una validazione in più: vogliamo che la descrizione della pizza contenga almeno 5 parole.
 
@@ -36,3 +36,9 @@ Tramite migration dobbiamo creare la tabella per le categorie. Popoliamola a man
 Aggiungiamo poi l’informazione della categoria nelle varie pagine :
 * nei dettagli di una singola pizza (nell’admin) mostrare la sua categoria
 * quando si crea/modifica una pizza si deve poter selezionare anche la sua categoria
+
+### Parte Cinque
+Oggi sviluppiamo un’altra importante funzionalità: aggiungiamo gli ingredienti alle nostre pizze.
+Una pizza può avere più ingredienti, e un ingrediente può essere presente in più pizze.
+* Creiamo quindi il Model necessario e la migration.
+* Aggiungiamo poi il codice al controller (e alle view) per la gestione degli ingredienti quando creiamo, modifichiamo o visualizziamo una pizza.

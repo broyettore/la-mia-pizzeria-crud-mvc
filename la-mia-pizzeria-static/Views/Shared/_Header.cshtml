@@ -4,14 +4,13 @@
         <nav>
             <ul class="d-flex align-items-center py-2 my-2">
                 <li class="m-1 p-1">
-                    <a href="@Url.Action("Index", "Pizza")">Home</a>
-                </li>
-                <li class="m-1 p-1">
                     <a href="@Url.Action("UserIndex", "Pizza")">Our Products</a>
                 </li>
                 <li class="m-1 p-1">
-                    <a href="#">Contact</a>
-                </li>
+                    <a href="@Url.Action("Index", "Pizza")">Admin</a>
+                </li>    
+
+                <partial name="_LoginPartial" />
             </ul>
         </nav>
     </div>

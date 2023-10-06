@@ -1,14 +1,20 @@
 ﻿<header>
     <div class="container d-flex justify-content-between align-items-center">
-        <h1 class="fs-4">Heaven's Slice <i class="fa-solid fa-pizza-slice"></i></h1>
+        <h1 class="fs-4 fw-bold">
+            Heaven's Slice <i class="fa-solid fa-pizza-slice"></i>
+        </h1>
         <nav>
             <ul class="d-flex align-items-center py-2 my-2">
                 <li class="m-1 p-1">
-                    <a href="@Url.Action("UserIndex", "Pizza")">Our Products</a>
+                    <a class="custom-link" href="@Url.Action("UserIndex", "Pizza")">Home</a>
                 </li>
-                <li class="m-1 p-1">
-                    <a href="@Url.Action("Index", "Pizza")">Admin</a>
-                </li>    
+
+                @if (User.IsInRole("ADMIN"))
+                {
+                    <li class="m-1 p-1">
+                        <a class="custom-link" href="@Url.Action("Index", "Pizza")">Admin</a>
+                    </li>
+                }
 
                 <partial name="_LoginPartial" />
             </ul>

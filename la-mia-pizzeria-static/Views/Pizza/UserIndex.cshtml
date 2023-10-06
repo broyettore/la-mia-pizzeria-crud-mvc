@@ -4,16 +4,22 @@
 
 @model List<Pizza>
 
-<div class="container d-flex flex-wrap justify-content-between py-4">
+<div class="container py-4 text-center">
+    <h2 class="fs-2">
+        Welcome to Heaven's Slice and as you can see we have some of the most amazing pizza you will ever taste !
+    </h2>
+</div>
+<div class="container d-flex flex-wrap justify-content-between py-4 mt-2">
     @foreach (Pizza pizza in Model)
     {
-        <div class="my-card-container card-@pizza.PizzaId my-3 mt-0">
-            <div class="overlay">
-                <div class="items"></div>
-                <div class="items head">
-                    <p>@pizza.Name</p>
-                    <p class="ms-card-p">@pizza.Description</p>
-                    <p class="ms-card-secondary">
+        <a href="@Url.Action("Details", "Pizza", new { id = pizza.PizzaId })">
+            <div class="my-card-container card-@pizza.PizzaId my-3 mt-0 ms-pop-in">
+                <div class="overlay">
+                    <div class="items"></div>
+                    <div class="items head">
+                        <p>@pizza.Name</p>
+                        <p class="ms-card-p">@pizza.Description</p>
+                        <p class="ms-card-secondary">
                             Ingredients:
                             @if (pizza.Ingredients?.Count > 0)
                             {
@@ -35,18 +41,19 @@
                             {
                                 <small>No Ingredients Specified</small>
                             }
-                    </p>
-                    <hr />
-                </div>
-                <div class="items price">
-                    <p class="new">€@pizza.Price</p>
-                </div>
-                <div class="items cart">
-                    <i class="fa fa-shopping-cart"></i>
-                    <span>ORDER NOW</span>
+                        </p>
+                        <hr />
+                    </div>
+                    <div class="items price">
+                        <p class="new">€@pizza.Price</p>
+                    </div>
+                    <div class="items cart">
+                        <i class="fa fa-shopping-cart"></i>
+                        <span>ORDER NOW</span>
+                    </div>
                 </div>
             </div>
-        </div>
+        </a>
     }
 </div>
 

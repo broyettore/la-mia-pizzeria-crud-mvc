@@ -14,7 +14,7 @@ else
     <div class="container py-3">
         <h1>Our Pizzas</h1>
 
-        <a class="btn my-5"
+        <a class="btn my-5 custom-link"
            href="@Url.Action("Create", "Pizza")">
             Create a New Pizza
         </a>
@@ -37,7 +37,7 @@ else
                 {
                     <tr>
                         <th scope="row">@pizza.PizzaId</th>
-                        <td><img width="200" src="@pizza.ImgPath" alt="@pizza.Name" /></td>
+                        <td><img src="@pizza.ImgPath" alt="@pizza.Name" /></td>
                         <td>@pizza.Name</td>
                         <td>@pizza.Description</td>
                         <td>€@pizza.Price</td>
@@ -76,8 +76,8 @@ else
                             }
                         </td>
                         <th scope="col">
-                            <a class="btn btn primary" href="@Url.Action("Details", "Pizza", new { id = pizza.PizzaId })">See More</a>
-                            <a class="btn btn primary" href="@Url.Action("Update", "Pizza", new { id = pizza.PizzaId })">Edit Pizza</a>
+                            <a class="btn btn primary custom-link" href="@Url.Action("Details", "Pizza", new { id = pizza.PizzaId })">See More</a>
+                            <a class="btn btn primary custom-link" href="@Url.Action("Update", "Pizza", new { id = pizza.PizzaId })">Edit Pizza</a>
                             <form asp-controller="Pizza" asp-action="Delete" asp-route-id="@pizza.PizzaId" method="post">
                                 @Html.AntiForgeryToken()
                                 <button type="submit" class="btn my-btn btn-sm">

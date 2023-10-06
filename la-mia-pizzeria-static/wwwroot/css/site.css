@@ -40,6 +40,26 @@ main {
     transform: scale(1.05);
     transition: ease .30s;
 }
+
+.ms-pop-in {
+    opacity: 0; /* Initially hide the content */
+    animation: slideAndFadeIn 1s forwards; /* Animation duration and fill-mode */
+    animation-delay: 1s; /* Delay before the animation starts */
+    transform: translateY(-50px); /* Move the content up initially */
+}
+
+@keyframes slideAndFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-50px); /* Start position: move up */
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0); /* End position: slide down */
+    }
+}
+
 /************************ card styling ************************/
 .my-card-container {
     width: 300px;
@@ -191,14 +211,14 @@ main {
 
 /*************** header links styling *************/
 
-a {
+.custom-link {
     text-decoration: none;
     color: black;
     font-weight: 700;
     position: relative;
 }
 
-a::before {
+.custom-link::before {
     content: '';
     background-color: lightsalmon;
     position: absolute;
@@ -210,7 +230,7 @@ a::before {
     transition: all .3s ease-in-out;
 }
 
-a:hover::before {
+.custom-link:hover::before {
     bottom: 0;
     height: 100%;
 }

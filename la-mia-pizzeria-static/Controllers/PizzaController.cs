@@ -8,7 +8,6 @@ using Microsoft.EntityFrameworkCore.ChangeTracking;
 
 namespace la_mia_pizzeria_static.Controllers
 {
-    [Authorize(Roles = "USER,ADMIN")]
     public class PizzaController : Controller
     {
         private readonly PizzaContext _myDb;

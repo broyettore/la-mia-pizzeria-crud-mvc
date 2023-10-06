@@ -31,7 +31,10 @@ namespace la_mia_pizzeria_static.Controllers
 
         public IActionResult UserIndex()
         {
-            List<Pizza> pizzas = _myDb.Pizzas.ToList<Pizza>();
+            List<Pizza> pizzas = _myDb.Pizzas
+                                      .Include(p => p.Category)
+                                      .Include(p => p.Ingredients)
+                                      .ToList();
             return View("UserIndex", pizzas);
         }
 
